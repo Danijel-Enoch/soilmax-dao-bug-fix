@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AddressZero } from "@ethersproject/constants";
 import { GlobalAuth } from "../context/GlobalContext";
+import { useState } from "react";
 
 export default function Membership() {
   const {
@@ -13,7 +14,21 @@ export default function Membership() {
     token,
     address,
     vote,
+    shortenAddress,
   } = GlobalAuth();
+
+  const [selectedProposal, setSelectedProposal] = useState("active");
+
+  const proposalTitles = [
+    {
+      id: "active",
+      title: "Active Proposals",
+    },
+    {
+      id: "new",
+      title: "New Proposals",
+    },
+  ];
 
   return (
     <section className="membership-page heroSection">
@@ -30,21 +45,23 @@ export default function Membership() {
           <section>
             <form>
               <p className="text">Member list</p>
-              <div className="addressTokenGroup div">
-                <input
-                  className="address"
-                  type="text"
-                  name=""
-                  id="address"
-                  placeholder="Address"
-                />
-                <input
-                  className="tokenAmt"
-                  type="number"
-                  name=""
-                  id="token-amount"
-                  placeholder="Token Amount"
-                />
+              <div className="">
+                <div className="addressTokenGroup div">
+                  <span className="address">Address</span>
+                  <span className="tokenAmt" placeholder="Token Amount">
+                    Token Amount
+                  </span>
+                </div>
+                {memberList?.map((member) => (
+                  <div key={member.address}>
+                    <span className="address">
+                      {shortenAddress(member.address)}
+                    </span>
+                    <span className="tokenAmt">{member.tokenAmount}</span>
+                  </div>
+                  //             );
+                ))}
+                <div className="addressTokenGroup div"></div>
               </div>
               <Link to="/createContract" className="createContractBtn">
                 Create personal proposals
@@ -53,7 +70,13 @@ export default function Membership() {
           </section>
           {/* Active proposals */}
           <section>
-            <p className="text">Active Proposals</p>
+            <div className="title">
+              {proposalTitles?.map((item) => (
+                <p key={item.id} className={`text ${item.id === selectedProposal ? `activeBtn` : ``}`} onClick={() => setSelectedProposal(item.id)}>
+                  {item.title}
+                </p>
+              ))}
+            </div>
             <form
               className="div proposals"
               onSubmit={async (e) => {
@@ -141,42 +164,42 @@ export default function Membership() {
               }}
             >
               {" "}
-              {proposals.map((proposal) => (
-                <div key={proposal.proposalId} className="card">
-                  <h5>{proposal.description}</h5>
-                  <div>
-                    {proposal.votes.map(({ type, label }) => (
-                      <div key={type}>
-                        <label
-                          className="radioBtns"
-                          htmlFor={proposal.proposalId + "-" + type}
-                        >
-                          <input
-                            type="radio"
-                            name={proposal.proposalId}
-                            value={type}
-                            id={proposal.proposalId + "-" + type}
-                            //default the "abstain" vote to checked
-                            defaultChecked={type === 2}
-                          />
-                          <div className="circle"></div>
-                          {label}
-                        </label>
-                        {/* <label className="radioBtns">
-                          <input type="radio" name="radio" />
-                          <div className="circle"></div>
-                          For
-                        </label>
-                        <label className="radioBtns">
-                          <input type="radio" name="radio" />
-                          <div className="circle"></div>
-                          Abstain
-                        </label> */}
-                      </div>
-                    ))}
+              
+              {selectedProposal === "active" && (
+                proposals.map((proposal) => (
+                  <div key={proposal.proposalId} className="card">
+                    <h5>{proposal.description}</h5>
+                    <div>
+                      {proposal.votes.map(({ type, label }) => (
+                        <div key={type}>
+                          <label
+                            className="radioBtns"
+                            htmlFor={proposal.proposalId + "-" + type}
+                          >
+                            <input
+                              type="radio"
+                              name={proposal.proposalId}
+                              value={type}
+                              id={proposal.proposalId + "-" + type}
+                              //default the "abstain" vote to checked
+                              defaultChecked={type === 2}
+                            />
+                            <div className="circle"></div>
+                            {label}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
+                ))
+              )}
+
+              {selectedProposal === "new" && (
+                <div className="">
+                  <h5>Proposal</h5>
+                  <input type="text" placeholder="Name of proposal" />
                 </div>
-              ))}
+              )}
             </form>
 
             {/* <button className="heroBtn">

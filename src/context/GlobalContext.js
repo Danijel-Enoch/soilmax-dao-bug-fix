@@ -322,7 +322,8 @@ export function GlobalContextProvider({ children }) {
         isVoting,
         token,
         address,
-        vote
+        vote,
+        shortenAddress
       }}
     >
       {children}

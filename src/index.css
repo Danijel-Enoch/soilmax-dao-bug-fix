@@ -15,7 +15,6 @@
   --section-title-font-size: 2em;
 }
 
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -46,11 +45,10 @@ body {
   width: 100%;
 } */
 
-a{
+a {
   text-decoration: none;
   color: var(--white);
 }
-
 
 /* ----------------------------------------------------------- */
 .header {
@@ -101,7 +99,6 @@ a{
   position: relative !important;
 }
 
-
 .menu a::after,
 .active::after {
   content: "";
@@ -146,7 +143,7 @@ button {
   padding: 12px 25px;
 }
 
-.navBtn{
+.navBtn {
   margin-top: 2rem;
 }
 
@@ -226,7 +223,7 @@ button {
   padding-inline: 0;
 }
 
-.bg{
+.bg {
   position: absolute;
   bottom: 0;
   /* top: 273px; */
@@ -276,7 +273,7 @@ button {
   transition: all 0.5s ease;
 }
 
-.connectWallet{
+.connectWallet {
   background: linear-gradient(
     90.72deg,
     rgba(107, 3, 184, 0.9) 21.79%,
@@ -329,9 +326,10 @@ button {
   line-height: 31px;
   text-align: left;
   margin-bottom: 10px;
+  color: #fff;
 }
 
- .heroTitle ~ .text{
+.heroTitle ~ .text {
   text-align: center;
 }
 
@@ -339,7 +337,6 @@ button {
   display: flex;
   align-items: center;
   width: 100%;
-  /* max-width: 300px; */
   margin-top: 10px;
 }
 
@@ -357,7 +354,7 @@ button {
   width: 45%;
 }
 
-.addressTokenGroup input {
+.addressTokenGroup span {
   background-color: transparent;
   color: var(--white);
   outline: none;
@@ -366,8 +363,9 @@ button {
   font-weight: 400;
   font-size: 16px;
   line-height: 31px;
-  color: #6b7280;
+  color: #e5e7eb;
   padding: 12px 14px;
+  text-align: left;
   margin-top: 0 !important;
 }
 
@@ -384,6 +382,21 @@ button {
   justify-content: center;
   align-items: center;
   padding-block: 11px;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.title .text{
+  padding: 6px 20px;
+  border-radius: 8px;
+}
+
+.title .activeBtn{
+  background-color: #454FDA;
 }
 
 .proposals {
@@ -466,7 +479,7 @@ button {
   margin-bottom: 123px;
 }
 
-.createContract .heroSection{
+.createContract .heroSection {
   height: 100vh;
 }
 
@@ -487,6 +500,7 @@ button {
   border-radius: 8px;
   padding: 12px 32px;
   margin-top: 10px;
+  color: #e5e7eb;
 }
 
 /* TABLET SCREENS */
@@ -515,7 +529,7 @@ button {
     line-height: 80px;
   }
 
-  .text{
+  .text {
     width: 615px;
   }
 
@@ -536,8 +550,6 @@ button {
     padding: 12px 32px;
   }
 }
-
-
 
 @media screen and (min-width: 1300px) {
   .menu {
@@ -583,10 +595,6 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-
-
-
 
 /* #root {
   min-height: 100vh;
@@ -723,4 +731,11 @@ button:focus {
 button:disabled {
   opacity: 0.8;
   pointer-events: none;
+}
+
+
+@media screen and (min-width: 768px) {
+  .title .text{
+    padding: 10px 28px;
+  }
 }
