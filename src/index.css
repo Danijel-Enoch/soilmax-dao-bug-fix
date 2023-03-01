@@ -228,7 +228,8 @@ button {
 
 .bg{
   position: absolute;
-  top: 273px;
+  bottom: 0;
+  /* top: 273px; */
   width: 100%;
 }
 
@@ -275,8 +276,18 @@ button {
   transition: all 0.5s ease;
 }
 
+.connectWallet{
+  background: linear-gradient(
+    90.72deg,
+    rgba(107, 3, 184, 0.9) 21.79%,
+    rgba(168, 24, 186, 0.9) 54.77%,
+    rgba(226, 43, 187, 0.9) 85.69%
+  ) !important;
+}
+
 .navBtn:hover,
-.heroBtn:hover {
+.heroBtn:hover,
+.connectWallet:hover {
   background: linear-gradient(
     200deg,
     rgba(107, 3, 184, 0.9) 21.79%,

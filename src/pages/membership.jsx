@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar/Navbar";
+import { AddressZero } from "@ethersproject/constants";
+import { GlobalAuth } from "../context/GlobalContext";
 
-export default function Membership({
-  memberList,
-  proposals,
-  setIsVoting,
-  setHasVoted,
-  isVoting,
-  hasVoted,
-  token,
-  AddressZero,
-  address,
-  vote,
-}) {
+export default function Membership() {
+  const {
+    memberList,
+    proposals,
+    setIsVoting,
+    setHasVoted,
+    isVoting,
+    hasVoted,
+    token,
+    address,
+    vote,
+  } = GlobalAuth();
+
   return (
     <section className="membership-page heroSection">
       {/* <Image className={styles.bg} src={heroBg} alt="hero background" /> */}
@@ -44,8 +46,8 @@ export default function Membership({
                   placeholder="Token Amount"
                 />
               </div>
-              <Link to="/dao/createContract" className="createContractBtn">
-                Create personal contract
+              <Link to="/createContract" className="createContractBtn">
+                Create personal proposals
               </Link>
             </form>
           </section>
@@ -176,26 +178,7 @@ export default function Membership({
                 </div>
               ))}
             </form>
-            {/* <form className="div" style={{ marginTop: "24px" }}>
-              <p>Proposal 1</p>
-              <div className="">
-                <label className="radioBtns">
-                  <input type="radio" name="radio" />
-                  <div className="circle"></div>
-                  Against
-                </label>
-                <label className="radioBtns">
-                  <input type="radio" name="radio" />
-                  <div className="circle"></div>
-                  For
-                </label>
-                <label className="radioBtns">
-                  <input type="radio" name="radio" />
-                  <div className="circle"></div>
-                  Abstain
-                </label>
-              </div>
-            </form> */}
+
             {/* <button className="heroBtn">
               <a className="heroButtonLink" href="/">
                 Submit votes

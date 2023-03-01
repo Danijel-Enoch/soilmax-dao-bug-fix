@@ -1,5 +1,5 @@
 import { ConnectWallet } from "@thirdweb-dev/react";
-import heroBg from "../components/assets/hero-bg.svg";
+import heroBg from "../components/assets/hero-bg.png";
 
 export default function DAO() {
   return (
@@ -7,7 +7,6 @@ export default function DAO() {
       <img className="bg" src={heroBg} alt="hero background" />
 
       <div className="heroContainer">
-        {/* <div className={`${HomeStyles.leftCol} ${styles.leftCol}`}> */}
         <h1 className="heroTitle">Welcome to SoliMax DAO</h1>
         <p className="text">
           Subtext giving brief info on what SoliMax DAO is all about. Subtext
@@ -15,12 +14,10 @@ export default function DAO() {
           brief info on what SoliMax DAO is all about. Yeah yeah yeahhhhhh
         </p>
         {/* HERO BTN */}
-        <button className="heroBtn">
-          <ConnectWallet />
-        </button>
+        <ConnectWallet
+          className="connectWallet"
+        />
       </div>
-
-      {/* </div> */}
     </section>
   );
 }

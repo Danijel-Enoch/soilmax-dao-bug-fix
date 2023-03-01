@@ -6,7 +6,6 @@ export default function HeroSection() {
         {/* <Image className={styles.bg} src={heroBg} alt="hero background" /> */}
 
         <div className="heroContainer">
-          {/* <div className={`${HomeStyles.leftCol} ${styles.leftCol}`}> */}
           <h1 className="heroTitle">Welcome to SoliMax DAO</h1>
           <p className="text">
             Subtext giving brief info on what SoliMax DAO is all about. Subtext
@@ -24,7 +23,6 @@ export default function HeroSection() {
           </button>
         </div>
 
-        {/* </div> */}
       </section>
   )
 }
