@@ -50,6 +50,10 @@ a {
   color: var(--white);
 }
 
+button{
+  border: none;
+}
+
 /* ----------------------------------------------------------- */
 .header {
   display: flex;
@@ -125,7 +129,7 @@ a {
 
 /* Nav button */
 .navBtn,
-button {
+.btn {
   background: linear-gradient(
     90.72deg,
     rgba(107, 3, 184, 0.9) 21.79%,
@@ -283,7 +287,7 @@ button {
 }
 
 .navBtn:hover,
-.heroBtn:hover,
+.btn:hover,
 .connectWallet:hover {
   background: linear-gradient(
     200deg,
@@ -314,6 +318,9 @@ button {
   display: grid;
   gap: 64px;
   margin-top: 31px;
+  width: 100%;
+  max-width: 700px;
+  margin-inline: auto;
 }
 
 .grid section {
@@ -340,7 +347,7 @@ button {
   margin-top: 10px;
 }
 
-.div {
+.form {
   background: rgba(217, 217, 217, 0.02);
   border: 1px solid #374151;
   border-radius: 8px;
@@ -352,14 +359,14 @@ button {
 
 .tokenAmt {
   width: 45%;
+  background: rgba(217, 217, 217, 0.02);
 }
 
-.addressTokenGroup span {
+.addressTokenGroup span,
+input {
   background-color: transparent;
   color: var(--white);
   outline: none;
-  border: none;
-  border-left: 1px solid #374151;
   font-weight: 400;
   font-size: 16px;
   line-height: 31px;
@@ -369,6 +376,11 @@ button {
   margin-top: 0 !important;
 }
 
+.addressTokenGroup span {
+  border: none;
+  border-left: 1px solid #374151;
+}
+
 .createContractBtn {
   font-weight: 400;
   font-size: 20px;
@@ -376,6 +388,8 @@ button {
   background: rgba(217, 217, 217, 0.03);
   border: 1.41148px solid #454fda;
   width: 100%;
+  margin-inline: auto;
+  max-width: 400px;
   margin-top: 64px;
   border-radius: 40px;
   display: flex;
@@ -384,45 +398,97 @@ button {
   padding-block: 11px;
 }
 
-.title{
+.title {
   display: flex;
   align-items: center;
   gap: 24px;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 6px;
+  width: fit-content;
+  margin-bottom: 30px;
 }
 
-.title .text{
+.title .text {
   padding: 6px 20px;
   border-radius: 8px;
+  background-color: transparent;
+  margin-bottom: 0;
 }
 
-.title .activeBtn{
-  background-color: #454FDA;
+.title .activeBtn {
+  background-color: #454fda;
 }
 
 .proposals {
   flex-direction: column;
+  gap: 24px;
+  margin-bottom: 2em;
 }
 
-.div > div {
+.proposals .card{
+  display: flex;
+  flex-direction: column;
+  /* gap: 16px; */
+  padding-block: 16px;
+  background: rgba(217, 217, 217, 0.02);
+  border: 1px solid #374151;
+  border-radius: 8px;
+}
+
+.proposals .card > *{
+  padding-inline: 16px ;
+}
+
+.card h5{
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+/* .div > div {
   border-top: 1px solid #374151;
   justify-content: space-between;
   padding: 22px 32px;
-}
+} */
 
 .proposals,
-.div > div,
+.form > div,
 .radioBtns {
   display: flex;
 }
 
-.div p {
+.newProposals input {
+  width: 100%;
+  border: 1px solid #374151;
+  border-radius: 8px;
+}
+
+.form p {
   width: fit-content;
   padding: 22px 32px;
 }
 
+.radioBtnContainer{
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #374151;
+  background: rgba(217, 217, 217, 0.02);
+border-radius: 0px 0px 8px 8px;
+padding-top: 20px;
+}
+
 .radioBtns {
+  align-items: center;
   gap: 12px;
-  color: #f9fafb;
+  
+}
+
+.radioBtns,
+.proposals h5{
+  color: #F9FAFB;
+  font-weight: 500;
+  font-size: 16px;
+line-height: 31px;
 }
 
 .radioBtns input {
@@ -533,13 +599,17 @@ button {
     width: 615px;
   }
 
+  .title .text{
+    width: fit-content;
+  }
+
   .grid {
     gap: 32px;
   }
 
-  .address {
+  /* .address {
     width: unset;
-  }
+  } */
 
   .tokenAmt {
     width: 147px;
@@ -548,6 +618,14 @@ button {
   .address label,
   .address input {
     padding: 12px 32px;
+  }
+
+  .proposals .card{
+    padding-block: 22px;
+  }
+
+  .proposals .card > *{
+    padding-inline: 32px;
   }
 }
 
@@ -733,9 +811,8 @@ button:disabled {
   pointer-events: none;
 }
 
-
 @media screen and (min-width: 768px) {
-  .title .text{
+  .title .text {
     padding: 10px 28px;
   }
 }

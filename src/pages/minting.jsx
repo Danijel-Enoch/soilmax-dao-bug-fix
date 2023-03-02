@@ -1,6 +1,7 @@
 import { Web3Button } from "@thirdweb-dev/react";
 import heroBg from "../components/assets/hero-bg.png";
 import { GlobalAuth } from "../context/GlobalContext";
+import emoji from '../components/assets/Emoji.svg';
 
 export default function NFTMinting() {
   const {editionDropAddress} = GlobalAuth();
@@ -11,7 +12,7 @@ export default function NFTMinting() {
 
       <div className="heroContainer">
         <h1 className="heroTitle">
-          Mint your free 🍪 DAO <br />
+          Mint your free <img src={emoji} alt="emoji" /> DAO <br />
           Membership NFT
         </h1>
 

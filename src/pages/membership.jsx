@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { AddressZero } from "@ethersproject/constants";
 import { GlobalAuth } from "../context/GlobalContext";
 import { useState } from "react";
+import emoji from "../components/assets/Emoji.svg";
 
 export default function Membership() {
   const {
@@ -36,21 +37,20 @@ export default function Membership() {
 
       <div className="heroContainer">
         {/* <div className={`${HomeStyles.leftCol} ${styles.leftCol}`}> */}
-        <h1 className="heroTitle">🍪DAO Member Page</h1>
+        <h1 className="heroTitle">
+          <img src={emoji} alt="emoji" /> DAO Member Page
+        </h1>
 
-        <p className="text">Congratulations on becoming a member!</p>
+        <p className="text" style={{color: "#9CA3AF"}}>Congratulations on becoming a member!</p>
 
         <div className="grid">
-          {/* member list */}
           <section>
             <form>
               <p className="text">Member list</p>
               <div className="">
-                <div className="addressTokenGroup div">
+                <div className="addressTokenGroup form">
                   <span className="address">Address</span>
-                  <span className="tokenAmt" placeholder="Token Amount">
-                    Token Amount
-                  </span>
+                  <span className="tokenAmt">Token Amount</span>
                 </div>
                 {memberList?.map((member) => (
                   <div key={member.address}>
@@ -59,26 +59,30 @@ export default function Membership() {
                     </span>
                     <span className="tokenAmt">{member.tokenAmount}</span>
                   </div>
-                  //             );
                 ))}
-                <div className="addressTokenGroup div"></div>
               </div>
-              <Link to="/createContract" className="createContractBtn">
+              {/* <Link to="/createContract" className="createContractBtn">
                 Create personal proposals
-              </Link>
+              </Link> */}
             </form>
           </section>
           {/* Active proposals */}
           <section>
             <div className="title">
               {proposalTitles?.map((item) => (
-                <p key={item.id} className={`text ${item.id === selectedProposal ? `activeBtn` : ``}`} onClick={() => setSelectedProposal(item.id)}>
+                <button
+                  key={item.id}
+                  className={`text ${
+                    item.id === selectedProposal ? `activeBtn` : ``
+                  }`}
+                  onClick={() => setSelectedProposal(item.id)}
+                >
                   {item.title}
-                </p>
+                </button>
               ))}
             </div>
             <form
-              className="div proposals"
+              className=" proposals"
               onSubmit={async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -87,7 +91,7 @@ export default function Membership() {
                 setIsVoting(true);
 
                 // lets get the votes from the form for the values
-                const votes = proposals.map((proposal) => {
+                const votes = proposals?.map((proposal) => {
                   const voteResult = {
                     proposalId: proposal.proposalId,
                     //abstain by default
@@ -164,12 +168,11 @@ export default function Membership() {
               }}
             >
               {" "}
-              
-              {selectedProposal === "active" && (
+              {selectedProposal === "active" &&
                 proposals.map((proposal) => (
                   <div key={proposal.proposalId} className="card">
                     <h5>{proposal.description}</h5>
-                    <div>
+                    <div className="radioBtnContainer">
                       {proposal.votes.map(({ type, label }) => (
                         <div key={type}>
                           <label
@@ -191,13 +194,15 @@ export default function Membership() {
                       ))}
                     </div>
                   </div>
-                ))
-              )}
-
+                ))}
               {selectedProposal === "new" && (
-                <div className="">
-                  <h5>Proposal</h5>
-                  <input type="text" placeholder="Name of proposal" />
+                <div className="newProposals">
+                  <h5 className="text">Proposal</h5>
+                  <input
+                    className=""
+                    type="text"
+                    placeholder="Name of proposal"
+                  />
                 </div>
               )}
             </form>
@@ -207,23 +212,41 @@ export default function Membership() {
                 Submit votes
               </a>
             </button> */}
-            <button
-              disabled={isVoting || hasVoted}
-              className="heroBtn"
-              type="submit"
-            >
-              {isVoting
-                ? "Voting..."
-                : hasVoted
-                ? "You Already Voted"
-                : "Submit Votes"}
-            </button>
-            {!hasVoted && (
-              <p className="subtext">
-                This will trigger multiple transactions that you’ll need to
-                sign!
-              </p>
+            {proposals.length > 0 && selectedProposal === "active" && (
+              <button
+                disabled={isVoting || hasVoted}
+                className="btn"
+                type="submit"
+                style={{fontSize: "18px", fontWeight: "500", width: "100%"}}
+              >
+                {isVoting
+                  ? "Voting..."
+                  : hasVoted
+                  ? "You Already Voted"
+                  : "Submit Votes"}
+              </button>
             )}
+            {selectedProposal === "new" && (
+              <button
+                disabled={isVoting || hasVoted}
+                className="btn"
+                type="submit"
+                style={{fontSize: "18px", fontWeight: "500", width: "100%"}}
+              >
+                Submit proposal
+              </button>
+            )}
+            {proposals.length > 0 &&
+              selectedProposal === "active" &&
+              !hasVoted && (
+                <p className="subtext">
+                  This will trigger multiple transactions that you’ll need to
+                  sign!
+                </p>
+              )}
+            {proposals.length === 0 &&
+              selectedProposal === "active" &&
+              !hasVoted && <p className="subtext">No Active proposals</p>}
           </section>
         </div>
       </div>
