@@ -50,7 +50,7 @@ a {
   color: var(--white);
 }
 
-button{
+button {
   border: none;
 }
 
@@ -426,7 +426,7 @@ input {
   margin-bottom: 2em;
 }
 
-.proposals .card{
+.proposals .card {
   display: flex;
   flex-direction: column;
   /* gap: 16px; */
@@ -436,11 +436,11 @@ input {
   border-radius: 8px;
 }
 
-.proposals .card > *{
-  padding-inline: 16px ;
+.proposals .card > * {
+  padding-inline: 16px;
 }
 
-.card h5{
+.card h5 {
   text-align: left;
   padding-bottom: 20px;
 }
@@ -468,27 +468,26 @@ input {
   padding: 22px 32px;
 }
 
-.radioBtnContainer{
+.radioBtnContainer {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid #374151;
   background: rgba(217, 217, 217, 0.02);
-border-radius: 0px 0px 8px 8px;
-padding-top: 20px;
+  border-radius: 0px 0px 8px 8px;
+  padding-top: 20px;
 }
 
 .radioBtns {
   align-items: center;
   gap: 12px;
-  
 }
 
 .radioBtns,
-.proposals h5{
-  color: #F9FAFB;
+.proposals h5 {
+  color: #f9fafb;
   font-weight: 500;
   font-size: 16px;
-line-height: 31px;
+  line-height: 31px;
 }
 
 .radioBtns input {
@@ -599,7 +598,7 @@ line-height: 31px;
     width: 615px;
   }
 
-  .title .text{
+  .title .text {
     width: fit-content;
   }
 
@@ -620,11 +619,11 @@ line-height: 31px;
     padding: 12px 32px;
   }
 
-  .proposals .card{
+  .proposals .card {
     padding-block: 22px;
   }
 
-  .proposals .card > *{
+  .proposals .card > * {
     padding-inline: 32px;
   }
 }
@@ -666,13 +665,19 @@ line-height: 31px;
   }
 
   .heroContainer {
-    --padding: 334px;
+    --padding: 156px;
   }
 
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    max-width: unset;
+    max-width: 1213px;
+    gap: 37px;
   }
+
+  /* .grid section
+  {
+    max-width: 481px;
+  } */
 }
 
 /* #root {

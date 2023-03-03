@@ -41,7 +41,9 @@ export default function Membership() {
           <img src={emoji} alt="emoji" /> DAO Member Page
         </h1>
 
-        <p className="text" style={{color: "#9CA3AF"}}>Congratulations on becoming a member!</p>
+        <p className="text" style={{ color: "#9CA3AF" }}>
+          Congratulations on becoming a member!
+        </p>
 
         <div className="grid">
           <section>
@@ -49,17 +51,16 @@ export default function Membership() {
               <p className="text">Member list</p>
               <div className="">
                 <div className="addressTokenGroup form">
-                  <span className="address">Address</span>
-                  <span className="tokenAmt">Token Amount</span>
+                  {memberList.length === 0 && <p>Nothing to show</p>}
+                  {memberList?.map((member) => (
+                    <div key={member.address}>
+                      <span className="address">
+                        {shortenAddress(member.address)}
+                      </span>
+                      <span className="tokenAmt">{member.tokenAmount}</span>
+                    </div>
+                  ))}
                 </div>
-                {memberList?.map((member) => (
-                  <div key={member.address}>
-                    <span className="address">
-                      {shortenAddress(member.address)}
-                    </span>
-                    <span className="tokenAmt">{member.tokenAmount}</span>
-                  </div>
-                ))}
               </div>
               {/* <Link to="/createContract" className="createContractBtn">
                 Create personal proposals
@@ -215,9 +216,9 @@ export default function Membership() {
             {proposals.length > 0 && selectedProposal === "active" && (
               <button
                 disabled={isVoting || hasVoted}
-                className="btn"
+                className="submit btn"
                 type="submit"
-                style={{fontSize: "18px", fontWeight: "500", width: "100%"}}
+                style={{ fontSize: "18px", fontWeight: "500", width: "100%" }}
               >
                 {isVoting
                   ? "Voting..."
@@ -229,9 +230,9 @@ export default function Membership() {
             {selectedProposal === "new" && (
               <button
                 disabled={isVoting || hasVoted}
-                className="btn"
+                className="submit btn"
                 type="submit"
-                style={{fontSize: "18px", fontWeight: "500", width: "100%"}}
+                style={{ fontSize: "18px", fontWeight: "500", width: "100%" }}
               >
                 Submit proposal
               </button>

@@ -8,15 +8,13 @@ export default function DAO() {
 
       <div className="heroContainer">
         <h1 className="heroTitle">Welcome to SoliMax DAO</h1>
-        <p className="text" style={{color: "#9CA3AF"}}>
+        <p className="text" style={{ color: "#9CA3AF" }}>
           Subtext giving brief info on what SoliMax DAO is all about. Subtext
           giving brief info on what SoliMax DAO is all about. Subtext giving
           brief info on what SoliMax DAO is all about. Yeah yeah yeahhhhhh
         </p>
         {/* HERO BTN */}
-        <ConnectWallet
-          className="connectWallet"
-        />
+        <ConnectWallet className="connectWallet" />
       </div>
     </section>
   );
