@@ -252,11 +252,11 @@ export default function Membership() {
                     {isVoting ? "Submitting..." : "Submit Proposal"}
                   </button>
                 </div>
-                <div className="form" style={{paddingBlock: "95px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "26px"}}>
+                {/* <div className="form" style={{paddingBlock: "95px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "26px"}}>
                     <img src={successMark} alt="success icon" width="72px" />
                     <h5 className="text" style={{textAlign: "center"}}>Proposal Successfully Submitted</h5>
-                    <a href="/" style={{color: "#A2A8FC"}}>Submit new proposal</a>
-                </div>
+                    <a href="/" style={{color: "#A2A8FC", marginTop: "8px"}}>Submit new proposal</a>
+                </div> */}
               </form>
             )}
           </section>
