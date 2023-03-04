@@ -11,7 +11,6 @@ import { AddressZero } from "@ethersproject/constants";
 import DAO from "./pages/DAO";
 import Membership from "./pages/membership";
 import CreateContract from "./pages/CreateContract";
-import Navbar from "./components/Navbar/Navbar";
 import { GlobalContextProvider } from "./context/GlobalContext";
 import NFTMinting from "./pages/minting";
 
