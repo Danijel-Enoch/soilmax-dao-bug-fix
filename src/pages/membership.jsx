@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { AddressZero } from "@ethersproject/constants";
 import { GlobalAuth } from "../context/GlobalContext";
-import { useState } from "react";
+import { useContract, useSDK } from "@thirdweb-dev/react";
+import { useEffect, useState } from "react";
 import emoji from "../components/assets/Emoji.svg";
-import successMark from '../components/assets/success-icon.svg';
+import successMark from "../components/assets/success-icon.svg";
 
 export default function Membership() {
   const {
@@ -20,6 +21,30 @@ export default function Membership() {
   } = GlobalAuth();
 
   const [selectedProposal, setSelectedProposal] = useState("active");
+  const [proposalDescription, setProposalDescription] = useState("");
+  // const { contract } = useContract(
+  //   "0x25c1bf6772142E523Eb1bcC54204E10DafA62839",
+  //   "vote"
+  // );
+
+  const tokenContract = useContract(
+    "0x40e7d561527C93830a590cd3d58BF0FdE78a6F2b",
+    "token"
+  );
+
+  const sdk = useSDK();
+  const { contract } = useContract(contractAddress, "vote");
+
+  useEffect(() => {
+    const contractAddress = sdk.deployer
+      .deployVote({
+        name: "My Vote",
+        primary_sale_recipient: "0xA1E8EBeFFfADF8b8A0b1E19ae0fDFD6195F84B90",
+        voting_token_address: "0x40e7d561527C93830a590cd3d58BF0FdE78a6F2b",
+      })
+      .then((res) => res)
+      .catch((err) => console.log(err.message));
+  });
 
   const proposalTitles = [
     {
@@ -35,7 +60,6 @@ export default function Membership() {
   const submitVotes = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("button clicked");
 
     //before we do async things, we want to disable the button to prevent double clicks
     setIsVoting(true);
@@ -118,8 +142,30 @@ export default function Membership() {
     }
   };
 
-  const submitNewProposal = async () => {
+  const submitNewProposal = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log("submit proposal button clicked");
+
+    const executions = [
+      {
+        // The contract you want to make a call to
+        toAddress: "0x25c1bf6772142E523Eb1bcC54204E10DafA62839",
+        // The amount of the native currency to send in this transaction
+        nativeTokenValue: 0,
+        // Transaction data that will be executed when the proposal is executed
+        // This is an example transfer transaction with a token contract (which you would need to setup in code)
+        transactionData: tokenContract.contract.encoder.encode("transfer", [
+          "0xA1E8EBeFFfADF8b8A0b1E19ae0fDFD6195F84B90",
+          0,
+        ]),
+      },
+    ];
+
+    const proposal = await contract
+      .propose(proposalDescription, executions)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -233,20 +279,40 @@ export default function Membership() {
               <form className=" proposals" onSubmit={submitNewProposal}>
                 <div className="newProposals">
                   <h5 className="text">Proposal</h5>
-                  <input
-                    className=""
-                    type="text"
-                    placeholder="Name of proposal"
-                  />
+                  <label
+                    htmlFor="title"
+                    style={{
+                      display: "flex",
+                      marginTop: "16px",
+                      gap: "10px",
+                      alignItems: "flex-start",
+                      flexDirection: "column",
+                    }}
+                  >
+                    Title
+                    <input type="text" placeholder="" />
+                  </label>
+                  <label htmlFor="">
+                    <input
+                      id="proposalDescription"
+                      className=""
+                      type="text"
+                      onChange={(e) => {
+                        setProposalDescription(e.target.value);
+                        console.log(proposalDescription);
+                      }}
+                      // placeholder="Description of proposal"
+                    />
+                  </label>
                   <button
-                    // disabled={isVoting || hasVoted}
+                    disabled={proposalDescription === ""}
                     className="submit btn"
                     type="submit"
                     style={{
                       fontSize: "18px",
                       fontWeight: "500",
                       width: "100%",
-                      marginTop: "32.09px"
+                      marginTop: "32.09px",
                     }}
                   >
                     {isVoting ? "Submitting..." : "Submit Proposal"}
