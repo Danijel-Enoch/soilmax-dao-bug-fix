@@ -22,6 +22,7 @@ export function GlobalContextProvider({ children }) {
     "token"
   );
 
+  const voteAddress="0x25c1bf6772142E523Eb1bcC54204E10DafA62839"
   const { contract: vote } = useContract(
     "0x25c1bf6772142E523Eb1bcC54204E10DafA62839",
     "vote"
@@ -165,6 +166,7 @@ export function GlobalContextProvider({ children }) {
     <GlobalContext.Provider
       value={{
         editionDropAddress,
+        voteAddress,
         memberList,
         proposals,
         setHasVoted,

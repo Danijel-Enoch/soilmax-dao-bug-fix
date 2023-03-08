@@ -4,9 +4,13 @@ import { GlobalAuth } from "../context/GlobalContext";
 import { useContract, useSDK } from "@thirdweb-dev/react";
 import { useEffect, useState } from "react";
 import emoji from "../components/assets/Emoji.svg";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import successMark from "../components/assets/success-icon.svg";
 
 export default function Membership() {
+
+  const { contract } = useContract("0x25c1bf6772142E523Eb1bcC54204E10DafA62839", "vote");
+  // const sdk = ThirdwebSDK.fromSigner(signer, "mainnet")
   const {
     memberList,
     proposals,
@@ -32,19 +36,19 @@ export default function Membership() {
     "token"
   );
 
-  const sdk = useSDK();
-  const { contract } = useContract(contractAddress, "vote");
+ 
+  
 
-  useEffect(() => {
-    const contractAddress = sdk.deployer
-      .deployVote({
-        name: "My Vote",
-        primary_sale_recipient: "0xA1E8EBeFFfADF8b8A0b1E19ae0fDFD6195F84B90",
-        voting_token_address: "0x40e7d561527C93830a590cd3d58BF0FdE78a6F2b",
-      })
-      .then((res) => res)
-      .catch((err) => console.log(err.message));
-  });
+  // useEffect(() => {
+  //   const contractAddress = sdk.deployer
+  //     .deployVote({
+  //       name: "My Vote",
+  //       primary_sale_recipient: "0xA1E8EBeFFfADF8b8A0b1E19ae0fDFD6195F84B90",
+  //       voting_token_address: "0x40e7d561527C93830a590cd3d58BF0FdE78a6F2b",
+  //     })
+  //     .then((res) => res)
+  //     .catch((err) => console.log(err.message));
+  // });
 
   const proposalTitles = [
     {
@@ -150,14 +154,14 @@ export default function Membership() {
     const executions = [
       {
         // The contract you want to make a call to
-        toAddress: "0x25c1bf6772142E523Eb1bcC54204E10DafA62839",
+        toAddress: "0x4cBDDaA2f48dF41aCc17434180892DB2B5ae93Cf",
         // The amount of the native currency to send in this transaction
-        nativeTokenValue: 0,
+        nativeTokenValue: 1,
         // Transaction data that will be executed when the proposal is executed
         // This is an example transfer transaction with a token contract (which you would need to setup in code)
         transactionData: tokenContract.contract.encoder.encode("transfer", [
           "0xA1E8EBeFFfADF8b8A0b1E19ae0fDFD6195F84B90",
-          0,
+          1,
         ]),
       },
     ];
@@ -318,11 +322,11 @@ export default function Membership() {
                     {isVoting ? "Submitting..." : "Submit Proposal"}
                   </button>
                 </div>
-                {/* <div className="form" style={{paddingBlock: "95px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "26px"}}>
+                <div className="form" style={{paddingBlock: "95px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "26px"}}>
                     <img src={successMark} alt="success icon" width="72px" />
                     <h5 className="text" style={{textAlign: "center"}}>Proposal Successfully Submitted</h5>
                     <a href="/" style={{color: "#A2A8FC", marginTop: "8px"}}>Submit new proposal</a>
-                </div> */}
+                </div>
               </form>
             )}
           </section>
